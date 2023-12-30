@@ -1,12 +1,12 @@
 import React from 'react';
-import Links from '../src/components/ Links';
+import Links from './components/ Links';
 import 'tailwindcss/tailwind.css';
 
 const App = () => {
 
   return (
     <div>
-      <Links />
+      <Links/>
     </div>
   );
 };
