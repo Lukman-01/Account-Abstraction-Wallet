@@ -27,7 +27,7 @@ const WalletConnection = ({ onConnect }) => {
     const handleNavigateToSendFunds = () => navigate('/send-funds');
 
     return (
-        <div className="bg-gray-800 min-h-screen flex flex-col items-center justify-center p-4">
+        <div className="bg-slate-800 min-h-screen flex flex-col items-center justify-center p-4">
             {walletConnected && <NavigationBar />}
             <h2 className="text-3xl md:text-4xl text-center text-white font-bold mb-6">
                 Account Abstraction Wallets for Tokens
