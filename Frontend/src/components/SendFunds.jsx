@@ -127,11 +127,11 @@ const SendFunds = ({ wallet }) => {
         <div className="bg-white p-6 rounded-lg shadow-lg">
           <h3 className="text-blue-600 text-lg font-bold mb-2">Wallet Address:</h3>
           <p className="text-gray-700 mb-4">{walletAddress}</p>
-          <h3 className="text-blue-600 text-lg font-bold mb-2">IBK ETH Balance:</h3>
-          <p className="text-gray-700 mb-4">{balance} IBK ETH</p>
+          <h3 className="text-blue-600 text-lg font-bold mb-2">ETH Balance:</h3>
+          <p className="text-gray-700 mb-4">{balance} ETH</p>
           <h3 className="text-blue-600 text-lg font-bold mb-2">Matic Balance:</h3>
           <p className="text-gray-700 mb-4">{maticBalance} Matic</p>
-          <h3 className="text-blue-600 text-lg font-bold mb-2">CSTM Balance:</h3>
+          <h3 className="text-blue-600 text-lg font-bold mb-2">CUSTOM Balance:</h3>
           <p className="text-gray-700 mb-4">{customTokenBalance} CSTM</p>
 
           <div className="mt-4">

@@ -22,8 +22,10 @@ const WalletUserDashboard = ({ wallet }) => {
 
   async function loadWallet() {
     try {
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
+      console.log(signer);
 
       // Creating a new instance of the WalletContractDeployer
       const walletContractDeployer = new ethers.Contract(
@@ -37,7 +39,7 @@ const WalletUserDashboard = ({ wallet }) => {
 
       if (userWalletAddress !== ethers.constants.AddressZero) {
         setWalletAddress(userWalletAddress);
-
+         
         // Creating a new instance of the WalletContract
         const walletContract = new ethers.Contract(
           userWalletAddress,
@@ -106,8 +108,8 @@ const WalletUserDashboard = ({ wallet }) => {
             <div>
               <h3 className="text-blue-600 text-lg font-bold mb-2">Wallet Address:</h3>
               <p className="text-gray-700 mb-4">{walletAddress}</p>
-              <h3 className="text-blue-600 text-lg font-bold mb-2">IBUKUN ETH Balance:</h3>
-              <p className="text-gray-700 mb-4">{ethBalance} IBK ETH</p>
+              <h3 className="text-blue-600 text-lg font-bold mb-2">ETH Balance:</h3>
+              <p className="text-gray-700 mb-4">{ethBalance} ETH</p>
               <h3 className="text-blue-600 text-lg font-bold mb-2">Matic Balance:</h3>
               <p className="text-gray-700 mb-4">{maticBalance} Matic</p>
               <h3 className="text-blue-600 text-lg font-bold mb-2">CUSTOM Balance:</h3>
