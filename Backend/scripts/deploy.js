@@ -22,7 +22,7 @@ async function main() {
 
   // Deploy the CustomToken
   const CustomToken = await hre.ethers.getContractFactory("CustomToken");
-  const customToken = await CustomToken.deploy("MyToken", "MTK", 1000000);
+  const customToken = await CustomToken.deploy("MyToken", "MTK", 100000000000);
   await customToken.deployed();
   console.log("CustomToken deployed to:", customToken.address);
 }
