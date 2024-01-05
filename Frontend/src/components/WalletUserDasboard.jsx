@@ -3,18 +3,20 @@ import { ethers } from 'ethers';
 import WalletContractDeployer from '../contractsAbis/WalletContractDeployer.json';
 import WalletContract from '../contractsAbis/WalletContract.json';
 import NavigationBar from './NavBar';
-import CustomTokenContractABI from '../contractsAbis/CustomToken.json';
 import PolygonMumbaiContract from '../contractsAbis/PolygonMumbaiContract.json';
+import CustomTokenContractABI from '../contractsAbis/CustomToken.json';
 
-const WalletUserDashboard = ({ wallet }) => {
+
+const WalletUserDashboard = ({wallet}) => {
   const ethTokenAddress = ethers.constants.AddressZero;
   const maticTokenAddress = '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889'; // the actual address of Polygon Mumbai Matic token
-  const customTokenAddress = '0xd071e116640Cc78450cE8d8878cA5e43400B9408';
+  const customTokenAddress = '0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8';
   const walletContractDeployerAddress = '0x1d87Db81f81F2A20F1Bf90B72E0d4ff6F2b2cD37';
   const [customTokenBalance, setCustomTokenBalance] = useState('0');
   const [ethBalance, setEthBalance] = useState('0');
   const [maticBalance, setMaticBalance] = useState('0');
   const [walletAddress, setWalletAddress] = useState('');
+  //const [error, setError] = useState('');
 
   useEffect(() => {
     loadWallet();
@@ -22,10 +24,8 @@ const WalletUserDashboard = ({ wallet }) => {
 
   async function loadWallet() {
     try {
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
-      console.log(signer);
 
       // Creating a new instance of the WalletContractDeployer
       const walletContractDeployer = new ethers.Contract(
@@ -39,7 +39,7 @@ const WalletUserDashboard = ({ wallet }) => {
 
       if (userWalletAddress !== ethers.constants.AddressZero) {
         setWalletAddress(userWalletAddress);
-         
+
         // Creating a new instance of the WalletContract
         const walletContract = new ethers.Contract(
           userWalletAddress,
@@ -55,28 +55,31 @@ const WalletUserDashboard = ({ wallet }) => {
         );
 
         // Get the wallet custom token balance
-        const customTokenBalance = await customTokenContract.balanceOf(userWalletAddress);
-        setCustomTokenBalance(customTokenBalance.toString());
+        // console.log(userWalletAddress);
+        // const customTokenBalance = await customTokenContract.balanceOf(userWalletAddress);
+        // setCustomTokenBalance(customTokenBalance.toString());
 
-        // Get the wallet ADESCOIN ETH balance
+        // Get the wallet ETH balance
         const ethBalance = await walletContract.getBalance();
+        console.log(ethBalance.toString());
         setEthBalance(ethBalance.toString());
 
         // Create a new instance of the Matic token contract
         const maticTokenContract = new ethers.Contract(maticTokenAddress, PolygonMumbaiContract.abi, signer);
 
         // Get the wallet Matic balance
-        const maticBalance = await maticTokenContract.balanceOf(userWalletAddress);
-        setMaticBalance(maticBalance.toString());
+        // const maticBalance = await maticTokenContract.balanceOf(userWalletAddress);
+        // setMaticBalance(maticBalance.toString());
       }
     } catch (error) {
       console.error(error);
     }
   }
 
+
   async function createWallet() {
     try {
-      const provider = new ethers.providers.Web3Provider(wallet);
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
 
       // Creating a new instance of the WalletContractDeployer
@@ -110,10 +113,10 @@ const WalletUserDashboard = ({ wallet }) => {
               <p className="text-gray-700 mb-4">{walletAddress}</p>
               <h3 className="text-blue-600 text-lg font-bold mb-2">ETH Balance:</h3>
               <p className="text-gray-700 mb-4">{ethBalance} ETH</p>
-              <h3 className="text-blue-600 text-lg font-bold mb-2">Matic Balance:</h3>
+              {/* <h3 className="text-blue-600 text-lg font-bold mb-2">Matic Balance:</h3>
               <p className="text-gray-700 mb-4">{maticBalance} Matic</p>
               <h3 className="text-blue-600 text-lg font-bold mb-2">CUSTOM Balance:</h3>
-              <p className="text-gray-700 mb-4">{customTokenBalance} CSTM</p>
+              <p className="text-gray-700 mb-4">{customTokenBalance} CSTM</p> */}
             </div>
           ) : (
             <div className="text-center">
