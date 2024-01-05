@@ -9,7 +9,7 @@ import PolygonMumbaiContractABI from '../contractsAbis/PolygonMumbaiContract.jso
 const SendFunds = ({ wallet }) => {
   const ethTokenAddress = ethers.constants.AddressZero;
   const maticTokenAddress = '0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889'; // the actual address of Polygon Mumbai Matic token
-  const customTokenAddress = '0xd071e116640Cc78450cE8d8878cA5e43400B9408';
+  const customTokenAddress = '0xd9145CCE52D386f254917e481eB44e9943F39138';
   const walletContractDeployerAddress = '0x1d87Db81f81F2A20F1Bf90B72E0d4ff6F2b2cD37';
   const [customTokenBalance, setCustomTokenBalance] = useState('0');
   const [toAddress, setToAddress] = useState('');
